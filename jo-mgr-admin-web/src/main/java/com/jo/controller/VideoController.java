@@ -1,11 +1,14 @@
 package com.jo.controller;
 
+import com.jo.enums.BgmOperatTypeEnum;
 import com.jo.pojo.Bgm;
 import com.jo.service.VideoService;
 import com.jo.utils.JSONResult;
 import com.jo.utils.PagedResult;
+import com.jo.web.utils.ZKCurator;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,9 @@ public class VideoController {
 
 	@Autowired
 	private VideoService videoService;
+	@Autowired
+    private Sid sid;
+
     @GetMapping("/showAddBgm")
     public String login() {
         return "video/addBgm";
@@ -71,7 +77,6 @@ public class VideoController {
 	@PostMapping("/addBgm")
 	@ResponseBody
 	public JSONResult addBgm(Bgm bgm) {
-    	System.out.println("上傳音樂");
 		videoService.addBgm(bgm);
     	return JSONResult.ok();
 	}
